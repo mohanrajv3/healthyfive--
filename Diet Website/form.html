@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive diet website</title>
+   
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Healthyfive</a>
+        <nav class="navbar">
+           <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="form.html">Registration</a></li>
+            <li><a href="reviews.html">Review</a></li>
+           </ul>
+        </nav>
+        <div class="fas fa-bars" id="menu"></div>
+    </header>
+    <br><br><br><br><br><br><br><br>
+    <form id="orderForm" class="product" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone No:</label>
+            <input type="tel" id="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="weight">Current weight:</label>
+            <input type="number" id="weight" required>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Your Location:</label>
+            <select id="location" required>
+                <option value="default" selected>Select Location</option>
+                <option value="chennai">Chennai</option>
+                <option value="salem">Salem</option>
+                <option value="covai">Covai</option>
+            </select>
+        </div>
+
+        <div class="form-group captcha-group">
+            <label for="captcha">CAPTCHA:</label>
+            <p id="captchaText" style="font-size: 20px; font-weight: bold;"></p>
+            <input type="text" id="userInput" placeholder="Enter the text" required>
+            <button id="generateCaptcha" onclick="generateCaptcha()" type="button">Generate CAPTCHA</button>
+            <button id="checkCaptcha" onclick="checkCaptcha()" type="button" disabled>Check CAPTCHA</button>
+        </div>
+
+        <div class="form-group captchaResult" id="captchaResult" style="color:red"></div>
+        <div class="form-group captchaCorrect" id="captchacorrect" style="color:green;"></div>
+
+        <div class="form-group">
+            <button  onclick="honnypot()" style="display: none;">click to continue</button>
+            <button class="btn" type="submit">Submit</button>
+        </div>
+    </form>
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="index.html "> <i class="right"></i>home</a>
+                <a href="about.html"> <i class="right"></i>about</a>
+                <a href="calculator.html"> <i class="right"></i>calculator</a>
+                <a href="services.html"> <i class="right"></i>services</a>
+             
+                <a href="reviews.html"> <i class="right"></i>reviews</a>
+            </div>
+
+
+            <div class="box">
+                <h3>extra links</h3>
+                <a> <i class="right"></i>my account</a>
+                <a > <i class="right"></i>my order</a>
+                <a> <i class="right"></i>my wishlist</a>
+                <a > <i class="right"></i>ask questions</a>
+                <a> <i class="right"></i>terms of use</a>
+                <a > <i class="right"></i>privacy policy</a>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a > <i class="phone"></i>+123-456-7890</a>
+                <a > <i class="phone"></i>+123-765-2568</a>
+                <a> <i class="envelope"></i>1234@gmail.com</a>
+                <a> <i class="map"></i>Chennai , India -600123</a>
+            </div>
+
+            <div class="box">
+                <h3>follow us</h3>
+                <a> <i class="facebook-f"></i>facebook</a>
+                <a> <i class="twitter"></i>twitter</a>
+                <a > <i class="instagram"></i>instagram</a>
+                <a> <i class="linkedin"></i>linkedin</a>
+                <a > <i class="github"></i>github</a>
+            </div>
+
+        </div>
+
+        <div class="credit">healthyfive</div>
+    
+    <script>
+        function generateRandomCaptcha(length = 6) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let captcha = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                captcha += characters[randomIndex];
+            }
+            return captcha;
+        }
+
+        function generateCaptcha() {
+            const captchaTextElement = document.getElementById('captchaText');
+            const userInputElement = document.getElementById('userInput');
+            const generateButton = document.getElementById('generateCaptcha');
+            const checkButton = document.getElementById('checkCaptcha');
+            
+            const captcha = generateRandomCaptcha();
+            captchaTextElement.innerText = captcha;
+            userInputElement.value = '';
+            generateButton.disabled = true;
+            checkButton.disabled = false;
+        }
+
+        function checkCaptcha() {
+            const captchaTextElement = document.getElementById('captchaText');
+            const userInputElement = document.getElementById('userInput');
+            const captchaResultElement = document.getElementById('captchaResult');
+            const captchaCorrectElement = document.getElementById('captchacorrect');
+            const generateButton = document.getElementById('generateCaptcha');
+            const checkButton = document.getElementById('checkCaptcha');
+
+            const captcha = captchaTextElement.innerText;
+            const userInput = userInputElement.value;
+
+            if (captcha === userInput) {
+                captchaResultElement.innerText = 'CAPTCHA is correct!';
+                captchaCorrectElement.innerText = '';
+            } else {
+                captchaResultElement.innerText = 'CAPTCHA is incorrect. Please try again.';
+                captchaCorrectElement.innerText = '';
+                generateButton.disabled = false;
+                checkButton.disabled = true;
+            }
+        }
+
+        // Generate a CAPTCHA on page load
+        window.addEventListener('DOMContentLoaded', generateCaptcha);
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
